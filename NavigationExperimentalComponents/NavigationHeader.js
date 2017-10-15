@@ -30,25 +30,32 @@
  * @providesModule NavigationHeader
  * @flow
  */
-'use strict';
+"use strict";
 
-const NavigationHeaderBackButton = require('./NavigationHeaderBackButton');
-const NavigationHeaderStyleInterpolator = require('./NavigationHeaderStyleInterpolator');
-const NavigationHeaderTitle = require('./NavigationHeaderTitle');
-const NavigationPropTypes = require('../NavigationPropTypes');
-import React, { Component } from 'react';
+const NavigationHeaderBackButton = require("./NavigationHeaderBackButton");
+const NavigationHeaderStyleInterpolator = require("./NavigationHeaderStyleInterpolator");
+const NavigationHeaderTitle = require("./NavigationHeaderTitle");
+const NavigationPropTypes = require("../NavigationPropTypes");
+import React, { Component } from "react";
+const PropTypes = require("prop-types");
 
 // const TVEventHandler = require('TVEventHandler');
 
-import { Animated, Platform, StyleSheet, View, TVEventHandler } from 'react-native';
+import {
+  Animated,
+  Platform,
+  StyleSheet,
+  View,
+  TVEventHandler
+} from "react-native";
 
 import type {
   NavigationSceneRendererProps,
-  NavigationStyleInterpolator,
-} from 'NavigationTypeDefinition';
+  NavigationStyleInterpolator
+} from "NavigationTypeDefinition";
 
 type SubViewProps = NavigationSceneRendererProps & {
-  onNavigateBack: ?Function,
+  onNavigateBack: ?Function
 };
 
 type SubViewRenderer = (subViewProps: SubViewProps) => ?React.Element<any>;
@@ -57,7 +64,7 @@ type DefaultProps = {
   renderLeftComponent: SubViewRenderer,
   renderRightComponent: SubViewRenderer,
   renderTitleComponent: SubViewRenderer,
-  statusBarHeight: number | Animated.Value,
+  statusBarHeight: number | Animated.Value
 };
 
 type Props = NavigationSceneRendererProps & {
@@ -67,21 +74,20 @@ type Props = NavigationSceneRendererProps & {
   renderTitleComponent: SubViewRenderer,
   style?: any,
   viewProps?: any,
-  statusBarHeight: number | Animated.Value,
+  statusBarHeight: number | Animated.Value
 };
 
-type SubViewName = 'left' | 'title' | 'right';
+type SubViewName = "left" | "title" | "right";
 
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-const { PropTypes } = React;
+const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : 0;
 
 class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
   props: Props;
 
   static defaultProps = {
     renderTitleComponent: (props: SubViewProps) => {
-      const title = String(props.scene.route.title || '');
+      const title = String(props.scene.route.title || "");
       return <NavigationHeaderTitle>{title}</NavigationHeaderTitle>;
     },
 
@@ -96,7 +102,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
       return null;
     },
 
-    statusBarHeight: STATUSBAR_HEIGHT,
+    statusBarHeight: STATUSBAR_HEIGHT
   };
 
   static propTypes = {
@@ -107,7 +113,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
     renderTitleComponent: PropTypes.func,
     style: View.propTypes.style,
     statusBarHeight: PropTypes.number,
-    viewProps: PropTypes.shape(View.propTypes),
+    viewProps: PropTypes.shape(View.propTypes)
   };
 
   _tvEventHandler: TVEventHandler;
@@ -115,7 +121,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
   componentDidMount(): void {
     this._tvEventHandler = new TVEventHandler();
     this._tvEventHandler.enable(this, function(cmp, evt) {
-      if (evt && evt.eventType === 'menu') {
+      if (evt && evt.eventType === "menu") {
         cmp.props.onNavigateBack && cmp.props.onNavigateBack();
       }
     });
@@ -137,12 +143,19 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
       return props;
     });
 
-    const barHeight = this.props.statusBarHeight instanceof Animated.Value
-      ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT))
-      : APPBAR_HEIGHT + this.props.statusBarHeight;
+    const barHeight =
+      this.props.statusBarHeight instanceof Animated.Value
+        ? Animated.add(
+            this.props.statusBarHeight,
+            new Animated.Value(APPBAR_HEIGHT)
+          )
+        : APPBAR_HEIGHT + this.props.statusBarHeight;
 
     return (
-      <Animated.View style={[styles.appbar, { height: barHeight }, style]} {...viewProps}>
+      <Animated.View
+        style={[styles.appbar, { height: barHeight }, style]}
+        {...viewProps}
+      >
         {scenesProps.map(this._renderLeft, this)}
         {scenesProps.map(this._renderTitle, this)}
         {scenesProps.map(this._renderRight, this)}
@@ -153,7 +166,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
   _renderLeft = (props: NavigationSceneRendererProps): ?React.Element<any> => {
     return this._renderSubView(
       props,
-      'left',
+      "left",
       this.props.renderLeftComponent,
       NavigationHeaderStyleInterpolator.forLeft
     );
@@ -162,7 +175,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
   _renderTitle = (props: NavigationSceneRendererProps): ?React.Element<any> => {
     return this._renderSubView(
       props,
-      'title',
+      "title",
       this.props.renderTitleComponent,
       NavigationHeaderStyleInterpolator.forCenter
     );
@@ -171,7 +184,7 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
   _renderRight = (props: NavigationSceneRendererProps): ?React.Element<any> => {
     return this._renderSubView(
       props,
-      'right',
+      "right",
       this.props.renderRightComponent,
       NavigationHeaderStyleInterpolator.forRight
     );
@@ -195,18 +208,25 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
       return null;
     }
 
-    const subViewProps = { ...props, onNavigateBack: this.props.onNavigateBack };
+    const subViewProps = {
+      ...props,
+      onNavigateBack: this.props.onNavigateBack
+    };
     const subView = renderer(subViewProps);
     if (subView === null) {
       return null;
     }
 
-    const pointerEvents = offset !== 0 || isStale ? 'none' : 'box-none';
+    const pointerEvents = offset !== 0 || isStale ? "none" : "box-none";
     return (
       <Animated.View
         pointerEvents={pointerEvents}
-        key={name + '_' + key}
-        style={[styles[name], { marginTop: this.props.statusBarHeight }, styleInterpolator(props)]}
+        key={name + "_" + key}
+        style={[
+          styles[name],
+          { marginTop: this.props.statusBarHeight },
+          styleInterpolator(props)
+        ]}
       >
         {subView}
       </Animated.View>
@@ -220,36 +240,36 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
 
 const styles = StyleSheet.create({
   appbar: {
-    alignItems: 'center',
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
-    borderBottomColor: 'rgba(0, 0, 0, .15)',
-    borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
+    alignItems: "center",
+    backgroundColor: Platform.OS === "ios" ? "#EFEFF2" : "#FFF",
+    borderBottomColor: "rgba(0, 0, 0, .15)",
+    borderBottomWidth: Platform.OS === "ios" ? StyleSheet.hairlineWidth : 0,
     elevation: 4,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    flexDirection: "row",
+    justifyContent: "flex-start"
   },
 
   title: {
     bottom: 0,
     left: APPBAR_HEIGHT,
-    position: 'absolute',
+    position: "absolute",
     right: APPBAR_HEIGHT,
-    top: 0,
+    top: 0
   },
 
   left: {
     bottom: 0,
     left: 0,
-    position: 'absolute',
-    top: 0,
+    position: "absolute",
+    top: 0
   },
 
   right: {
     bottom: 0,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    top: 0,
-  },
+    top: 0
+  }
 });
 
 module.exports = NavigationHeader;

@@ -9,9 +9,9 @@
  * @providesModule NavigationPropTypes
  * @flow
  */
-'use strict';
+"use strict";
 
-import type { NavigationSceneRendererProps } from 'NavigationTypeDefinition';
+import type { NavigationSceneRendererProps } from "NavigationTypeDefinition";
 
 /**
  * React component PropTypes Definitions. Consider using this as a supplementary
@@ -19,14 +19,13 @@ import type { NavigationSceneRendererProps } from 'NavigationTypeDefinition';
  * error at run-time, where as `NavigationTypeDefinition` capture the flow
  * type check errors at build time.
  */
-const { Animated } = require('react-native');
-import React, { Component } from 'react';
-
-const { PropTypes } = React;
+const { Animated } = require("react-native");
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 /* NavigationAction */
 const action = PropTypes.shape({
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 });
 
 /* NavigationAnimatedValue  */
@@ -34,13 +33,13 @@ const animatedValue = PropTypes.instanceOf(Animated.Value);
 
 /* NavigationRoute  */
 const navigationRoute = PropTypes.shape({
-  key: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired
 });
 
 /* NavigationState  */
 const navigationState = PropTypes.shape({
   index: PropTypes.number.isRequired,
-  routes: PropTypes.arrayOf(navigationRoute),
+  routes: PropTypes.arrayOf(navigationRoute)
 });
 
 /* NavigationLayout */
@@ -49,7 +48,7 @@ const layout = PropTypes.shape({
   initHeight: PropTypes.number.isRequired,
   initWidth: PropTypes.number.isRequired,
   isMeasured: PropTypes.bool.isRequired,
-  width: animatedValue,
+  width: animatedValue
 });
 
 /* NavigationScene */
@@ -58,7 +57,7 @@ const scene = PropTypes.shape({
   isActive: PropTypes.bool.isRequired,
   isStale: PropTypes.bool.isRequired,
   key: PropTypes.string.isRequired,
-  route: navigationRoute.isRequired,
+  route: navigationRoute.isRequired
 });
 
 /* NavigationSceneRendererProps */
@@ -68,7 +67,7 @@ const SceneRendererProps = {
   position: animatedValue.isRequired,
   progress: animatedValue.isRequired,
   scene: scene.isRequired,
-  scenes: PropTypes.arrayOf(scene).isRequired,
+  scenes: PropTypes.arrayOf(scene).isRequired
 };
 
 const SceneRenderer = PropTypes.shape(SceneRendererProps);
@@ -86,7 +85,7 @@ const panHandlers = PropTypes.shape({
   onResponderTerminate: PropTypes.func.isRequired,
   onResponderTerminationRequest: PropTypes.func.isRequired,
   onStartShouldSetResponder: PropTypes.func.isRequired,
-  onStartShouldSetResponderCapture: PropTypes.func.isRequired,
+  onStartShouldSetResponderCapture: PropTypes.func.isRequired
 });
 
 /**
@@ -101,7 +100,7 @@ function extractSceneRendererProps(
     position: props.position,
     progress: props.progress,
     scene: props.scene,
-    scenes: props.scenes,
+    scenes: props.scenes
   };
 }
 
@@ -117,5 +116,5 @@ module.exports = {
   action,
   navigationState,
   navigationRoute,
-  panHandlers,
+  panHandlers
 };
