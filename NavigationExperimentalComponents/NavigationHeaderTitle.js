@@ -30,50 +30,51 @@
  * @providesModule NavigationHeaderTitle
  * @flow
  */
-'use strict';
+"use strict";
 
-const React = require('react');
-const ReactNative = require('react-native');
+const React = require("react");
+const ReactNative = require("react-native");
+const PropTypes = require("prop-types");
 
-const {
-  Platform,
-  StyleSheet,
-  View,
-  Text,
-} = ReactNative;
+const { Platform, StyleSheet, View, Text } = ReactNative;
 
 type Props = {
   children?: React.Element<any>,
   style?: any,
   textStyle?: any,
-  viewProps?: any,
-}
+  viewProps?: any
+};
 
-const NavigationHeaderTitle = ({ children, style, textStyle, viewProps }: Props) => (
-  <View style={[ styles.title, style ]} {...viewProps}>
-    <Text style={[ styles.titleText, textStyle ]}>{children}</Text>
+const NavigationHeaderTitle = ({
+  children,
+  style,
+  textStyle,
+  viewProps
+}: Props) => (
+  <View style={[styles.title, style]} {...viewProps}>
+    <Text style={[styles.titleText, textStyle]}>{children}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
   title: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginHorizontal: 16
   },
 
   titleText: {
     flex: 1,
     fontSize: 18,
-    fontWeight: '500',
-    color: 'rgba(0, 0, 0, .9)',
-    textAlign: Platform.OS === 'ios' ? 'center' : 'left'
+    fontWeight: "500",
+    color: "rgba(0, 0, 0, .9)",
+    textAlign: Platform.OS === "ios" ? "center" : "left"
   }
 });
 
 NavigationHeaderTitle.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   style: View.propTypes.style,
   textStyle: Text.propTypes.style
 };

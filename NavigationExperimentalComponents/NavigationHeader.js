@@ -37,7 +37,7 @@ const NavigationHeaderStyleInterpolator = require("./NavigationHeaderStyleInterp
 const NavigationHeaderTitle = require("./NavigationHeaderTitle");
 const NavigationPropTypes = require("../NavigationPropTypes");
 import React, { Component } from "react";
-const PropTypes = require("prop-types");
+import PropTypes from "prop-types";
 
 // const TVEventHandler = require('TVEventHandler');
 

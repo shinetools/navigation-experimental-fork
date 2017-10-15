@@ -21,48 +21,55 @@
  * @providesModule NavigationHeaderBackButton
  * @flow
 */
-'use strict';
+"use strict";
 
-const React = require('react');
-const ReactNative = require('react-native');
+const React = require("react");
+const ReactNative = require("react-native");
+const PropTypes = require("prop-types");
 
 const {
   I18nManager,
   Image,
   Platform,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity
 } = ReactNative;
 
 type Props = {
   imageStyle?: any,
   onPress: Function,
-  style?: any,
+  style?: any
 };
 
 const NavigationHeaderBackButton = (props: Props) => (
-  <TouchableOpacity style={[styles.buttonContainer, props.style]} onPress={props.onPress}>
-    <Image style={[styles.button, props.imageStyle]} source={require('./assets/back-icon.png')} />
+  <TouchableOpacity
+    style={[styles.buttonContainer, props.style]}
+    onPress={props.onPress}
+  >
+    <Image
+      style={[styles.button, props.imageStyle]}
+      source={require("./assets/back-icon.png")}
+    />
   </TouchableOpacity>
 );
 
 NavigationHeaderBackButton.propTypes = {
-  onPress: React.PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
   button: {
     height: 24,
     width: 24,
-    margin: Platform.OS === 'ios' ? 10 : 16,
-    resizeMode: 'contain',
-    transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+    margin: Platform.OS === "ios" ? 10 : 16,
+    resizeMode: "contain",
+    transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }]
   }
 });
 
