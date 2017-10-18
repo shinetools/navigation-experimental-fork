@@ -30,14 +30,14 @@
  * @providesModule NavigationPointerEventsContainer
  * @flow
  */
-'use strict';
+"use strict";
 
-import React from 'react';
-const NavigationAnimatedValueSubscription = require('./NavigationAnimatedValueSubscription');
+import React, { Component } from "react";
+const NavigationAnimatedValueSubscription = require("./NavigationAnimatedValueSubscription");
 
-const invariant = require('fbjs/lib/invariant');
+const invariant = require("fbjs/lib/invariant");
 
-import type { NavigationSceneRendererProps } from 'NavigationTypeDefinition';
+import type { NavigationSceneRendererProps } from "NavigationTypeDefinition";
 
 type Props = NavigationSceneRendererProps;
 
@@ -95,8 +95,8 @@ function create(Component: ReactClass<any>): ReactClass<any> {
       this._component = component;
       if (component) {
         invariant(
-          typeof component.setNativeProps === 'function',
-          'component must implement method `setNativeProps`'
+          typeof component.setNativeProps === "function",
+          "component must implement method `setNativeProps`"
         );
       }
     }
@@ -124,7 +124,7 @@ function create(Component: ReactClass<any>): ReactClass<any> {
 
       if (scene.isStale || navigationState.index !== scene.index) {
         // The scene isn't focused.
-        return scene.index > navigationState.index ? 'box-only' : 'none';
+        return scene.index > navigationState.index ? "box-only" : "none";
       }
 
       const offset = position.__getAnimatedValue() - navigationState.index;
@@ -132,15 +132,15 @@ function create(Component: ReactClass<any>): ReactClass<any> {
         // The positon is still away from scene's index.
         // Scene's children should not receive touches until the position
         // is close enough to scene's index.
-        return 'box-only';
+        return "box-only";
       }
 
-      return 'auto';
+      return "auto";
     }
   }
   return Container;
 }
 
 module.exports = {
-  create,
+  create
 };

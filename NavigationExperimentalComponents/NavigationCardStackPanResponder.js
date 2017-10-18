@@ -9,18 +9,18 @@
  * @providesModule NavigationCardStackPanResponder
  * @flow
  */
-'use strict';
+"use strict";
 
-const { Animated, I18nManager } = require('react-native');
+const { Animated, I18nManager } = require("react-native");
 
-const NavigationAbstractPanResponder = require('../NavigationAbstractPanResponder');
+const NavigationAbstractPanResponder = require("../NavigationAbstractPanResponder");
 
-const clamp = require('react-native/Libraries/Utilities/clamp');
+const clamp = require("react-native/Libraries/Utilities/clamp");
 
 import type {
   NavigationPanPanHandlers,
-  NavigationSceneRendererProps,
-} from 'NavigationTypeDefinition';
+  NavigationSceneRendererProps
+} from "NavigationTypeDefinition";
 
 const emptyFunction = () => {};
 
@@ -50,18 +50,18 @@ const DISTANCE_THRESHOLD = 100;
  * Primitive gesture directions.
  */
 const Directions = {
-  HORIZONTAL: 'horizontal',
-  VERTICAL: 'vertical',
+  HORIZONTAL: "horizontal",
+  VERTICAL: "vertical"
 };
 
-export type NavigationGestureDirection = 'horizontal' | 'vertical';
+export type NavigationGestureDirection = "horizontal" | "vertical";
 
 type Props = NavigationSceneRendererProps & {
   onNavigateBack: ?Function,
   /**
   * The distance from the edge of the navigator which gesture response can start for.
   **/
-  gestureResponseDistance: ?number,
+  gestureResponseDistance: ?number
 };
 
 /**
@@ -113,9 +113,11 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
     const layout = props.layout;
     const isVertical = this._isVertical;
     const index = props.navigationState.index;
-    const currentDragDistance = gesture[isVertical ? 'dy' : 'dx'];
-    const currentDragPosition = gesture[isVertical ? 'moveY' : 'moveX'];
-    const maxDragDistance = isVertical ? layout.height.__getValue() : layout.width.__getValue();
+    const currentDragDistance = gesture[isVertical ? "dy" : "dx"];
+    const currentDragPosition = gesture[isVertical ? "moveY" : "moveX"];
+    const maxDragDistance = isVertical
+      ? layout.height.__getValue()
+      : layout.width.__getValue();
 
     const positionMax = isVertical
       ? props.gestureResponseDistance
@@ -129,7 +131,11 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
       return false;
     }
 
-    return Math.abs(currentDragDistance) > RESPOND_THRESHOLD && maxDragDistance > 0 && index > 0;
+    return (
+      Math.abs(currentDragDistance) > RESPOND_THRESHOLD &&
+      maxDragDistance > 0 &&
+      index > 0
+    );
   }
 
   onPanResponderGrant(): void {
@@ -148,12 +154,15 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
     const props = this._props;
     const layout = props.layout;
     const isVertical = this._isVertical;
-    const axis = isVertical ? 'dy' : 'dx';
+    const axis = isVertical ? "dy" : "dx";
     const index = props.navigationState.index;
-    const distance = isVertical ? layout.height.__getValue() : layout.width.__getValue();
-    const currentValue = I18nManager.isRTL && axis === 'dx'
-      ? this._startValue + gesture[axis] / distance
-      : this._startValue - gesture[axis] / distance;
+    const distance = isVertical
+      ? layout.height.__getValue()
+      : layout.width.__getValue();
+    const currentValue =
+      I18nManager.isRTL && axis === "dx"
+        ? this._startValue + gesture[axis] / distance
+        : this._startValue - gesture[axis] / distance;
 
     const value = clamp(index - 1, currentValue, index);
 
@@ -169,9 +178,10 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
 
     const props = this._props;
     const isVertical = this._isVertical;
-    const axis = isVertical ? 'dy' : 'dx';
+    const axis = isVertical ? "dy" : "dx";
     const index = props.navigationState.index;
-    const distance = I18nManager.isRTL && axis === 'dx' ? -gesture[axis] : gesture[axis];
+    const distance =
+      I18nManager.isRTL && axis === "dx" ? -gesture[axis] : gesture[axis];
 
     props.position.stopAnimation((value: number) => {
       this._reset();
@@ -180,7 +190,10 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
         return;
       }
 
-      if (distance > DISTANCE_THRESHOLD || value <= index - POSITION_THRESHOLD) {
+      if (
+        distance > DISTANCE_THRESHOLD ||
+        value <= index - POSITION_THRESHOLD
+      ) {
         props.onNavigateBack();
       }
     });
@@ -196,7 +209,7 @@ class NavigationCardStackPanResponder extends NavigationAbstractPanResponder {
     Animated.timing(props.position, {
       toValue: props.navigationState.index,
       duration: ANIMATION_DURATION,
-      useNativeDriver: props.position.__isNative,
+      useNativeDriver: props.position.__isNative
     }).start();
   }
 
@@ -239,5 +252,5 @@ module.exports = {
 
   // methods.
   forHorizontal,
-  forVertical,
+  forVertical
 };

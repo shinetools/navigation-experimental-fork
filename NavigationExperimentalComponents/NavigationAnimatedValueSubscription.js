@@ -25,11 +25,9 @@
  * @providesModule NavigationAnimatedValueSubscription
  * @flow
  */
-'use strict';
+"use strict";
 
-import type  {
-  NavigationAnimatedValue
-} from 'NavigationTypeDefinition';
+import type { NavigationAnimatedValue } from "NavigationTypeDefinition";
 
 class NavigationAnimatedValueSubscription {
   _value: NavigationAnimatedValue;

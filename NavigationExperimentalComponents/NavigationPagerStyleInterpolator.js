@@ -30,11 +30,11 @@
  * @providesModule NavigationPagerStyleInterpolator
  * @flow
  */
-'use strict';
+"use strict";
 
-const { I18nManager } = require('react-native');
+const { I18nManager } = require("react-native");
 
-import type { NavigationSceneRendererProps } from 'NavigationTypeDefinition';
+import type { NavigationSceneRendererProps } from "NavigationTypeDefinition";
 
 /**
  * Utility that builds the style for the card in the cards list.
@@ -64,7 +64,7 @@ function forInitial(props: NavigationSceneRendererProps): Object {
   const translate = focused ? 0 : 1000000 * dir;
   return {
     opacity,
-    transform: [{ translateX: translate }, { translateY: translate }],
+    transform: [{ translateX: translate }, { translateY: translate }]
   };
 }
 
@@ -84,17 +84,17 @@ function forHorizontal(props: NavigationSceneRendererProps): Object {
 
   const translateX = position.interpolate({
     inputRange,
-    outputRange,
+    outputRange
   });
 
   return {
     opacity: 1,
-    shadowColor: 'transparent',
+    shadowColor: "transparent",
     shadowRadius: 0,
-    transform: [{ scale: 1 }, { translateX }, { translateY: 0 }],
+    transform: [{ scale: 1 }, { translateX }, { translateY: 0 }]
   };
 }
 
 module.exports = {
-  forHorizontal,
+  forHorizontal
 };

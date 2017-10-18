@@ -30,11 +30,11 @@
  * @providesModule NavigationCardStackStyleInterpolator
  * @flow
  */
-'use strict';
+"use strict";
 
-const { I18nManager } = require('react-native');
+const { I18nManager } = require("react-native");
 
-import type { NavigationSceneRendererProps } from 'NavigationTypeDefinition';
+import type { NavigationSceneRendererProps } from "NavigationTypeDefinition";
 
 /**
  * Utility that builds the style for the card in the cards stack.
@@ -63,7 +63,7 @@ function forInitial(props: NavigationSceneRendererProps): Object {
   const translate = focused ? 0 : 1000000;
   return {
     opacity,
-    transform: [{ translateX: translate }, { translateY: translate }],
+    transform: [{ translateX: translate }, { translateY: translate }]
   };
 }
 
@@ -83,23 +83,23 @@ function forHorizontal(props: NavigationSceneRendererProps): Object {
 
   const opacity = position.interpolate({
     inputRange,
-    outputRange: ([1, 1, 0.3, 0]: Array<number>),
+    outputRange: ([1, 1, 0.3, 0]: Array<number>)
   });
 
   const scale = position.interpolate({
     inputRange,
-    outputRange: ([1, 1, 0.95, 0.95]: Array<number>),
+    outputRange: ([1, 1, 0.95, 0.95]: Array<number>)
   });
 
   const translateY = 0;
   const translateX = position.interpolate({
     inputRange,
-    outputRange,
+    outputRange
   });
 
   return {
     opacity,
-    transform: [{ scale }, { translateX }, { translateY }],
+    transform: [{ scale }, { translateX }, { translateY }]
   };
 }
 
@@ -116,23 +116,23 @@ function forVertical(props: NavigationSceneRendererProps): Object {
 
   const opacity = position.interpolate({
     inputRange,
-    outputRange: ([1, 1, 0.3, 0]: Array<number>),
+    outputRange: ([1, 1, 0.3, 0]: Array<number>)
   });
 
   const scale = position.interpolate({
     inputRange,
-    outputRange: ([1, 1, 0.95, 0.95]: Array<number>),
+    outputRange: ([1, 1, 0.95, 0.95]: Array<number>)
   });
 
   const translateX = 0;
   const translateY = position.interpolate({
     inputRange,
-    outputRange: ([height, 0, -10, -10]: Array<number>),
+    outputRange: ([height, 0, -10, -10]: Array<number>)
   });
 
   return {
     opacity,
-    transform: [{ scale }, { translateX }, { translateY }],
+    transform: [{ scale }, { translateX }, { translateY }]
   };
 }
 
@@ -147,5 +147,5 @@ function canUseNativeDriver(isVertical: boolean): boolean {
 module.exports = {
   forHorizontal,
   forVertical,
-  canUseNativeDriver,
+  canUseNativeDriver
 };
