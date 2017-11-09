@@ -31,7 +31,7 @@
  * @flow
  */
 "use strict";
-import { NativeModules } from "react-native";
+import { NativeModules, ViewStylePropTypes } from "react-native";
 const PropTypes = require("prop-types");
 const NativeAnimatedModule = NativeModules.NativeAnimatedModule;
 const NavigationCard = require("./NavigationCard");
@@ -200,12 +200,12 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
     /**
      * Custom style applied to the cards stack.
      */
-    style: View.propTypes.style,
+    style: ViewStylePropTypes,
 
     /**
      * Custom style applied to the scenes stack.
      */
-    scenesStyle: View.propTypes.style
+    scenesStyle: ViewStylePropTypes
   };
 
   static defaultProps: DefaultProps = {
