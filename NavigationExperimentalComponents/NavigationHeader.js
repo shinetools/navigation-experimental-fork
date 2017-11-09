@@ -47,7 +47,7 @@ import {
   StyleSheet,
   View,
   TVEventHandler,
-  ViewStylePropTypes
+  ViewPropTypes
 } from "react-native";
 
 import type {
@@ -112,9 +112,9 @@ class NavigationHeader extends React.PureComponent<DefaultProps, Props, any> {
     renderLeftComponent: PropTypes.func,
     renderRightComponent: PropTypes.func,
     renderTitleComponent: PropTypes.func,
-    style: ViewStylePropTypes,
+    style: ViewPropTypes.style,
     statusBarHeight: PropTypes.number,
-    viewProps: PropTypes.shape(View.propTypes)
+    viewProps: PropTypes.shape(ViewPropTypes)
   };
 
   _tvEventHandler: TVEventHandler;

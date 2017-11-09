@@ -12,4 +12,4 @@ or
 
 ### Use
 
-`import NavigationExperimental from 'navigation-experimental-fork'`
+`import NavigationExperimental from '@shinetools/navigation-experimental-fork'`
