@@ -2,22 +2,23 @@ Arguments:
   /usr/local/bin/node /usr/local/bin/yarn publish
 
 PATH: 
-  /Users/Raphael/.yarn/bin:/Users/Raphael/.fastlane/bin:/opt/local/bin:/opt/local/sbin:/Users/Raphael/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /Users/Raphael/.fastlane/bin:/opt/local/bin:/opt/local/sbin:/Users/Raphael/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.1.0
 
 Node version: 
-  8.9.0
+  9.2.0
 
 Platform: 
   darwin x64
 
 npm manifest: 
   {
-    "name": "navigation-experimental-fork",
+    "name": "@shinetools/navigation-experimental-fork",
     "version": "1.0.8",
-    "description": "NavigationExperimental from RN 0.43.3. Useful when you still depend on it in RN >= 0.44.",
+    "description":
+      "NavigationExperimental from RN 0.43.3. Useful when you still depend on it in RN >= 0.44.",
     "main": "NavigationExperimental.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
@@ -37,14 +38,14 @@ Lockfile:
   No lockfile
 
 Trace: 
-  Error: https://registry.yarnpkg.com/navigation-experimental-fork: You do not have permission to publish "navigation-experimental-fork". Are you logged in as the correct user?
+  Error: https://registry.yarnpkg.com/@shinetools%2fnavigation-experimental-fork: You cannot publish over the previously published version 1.0.8.
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:61779:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:121917:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
+      at Request.emit (events.js:159:13)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:122900:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
+      at Request.emit (events.js:159:13)
       at Gunzip.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:122820:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+      at Object.onceWrapper (events.js:254:19)
+      at Gunzip.emit (events.js:164:20)
+      at endReadableNT (_stream_readable.js:1054:12)
+      at _combinedTickCallback (internal/process/next_tick.js:138:11)
