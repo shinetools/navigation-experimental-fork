@@ -30,18 +30,18 @@
  * @providesModule NavigationCardStack
  * @flow
  */
-"use strict";
-import { NativeModules, ViewStylePropTypes } from "react-native";
-const PropTypes = require("prop-types");
+'use strict';
+import { NativeModules, ViewStylePropTypes } from 'react-native';
+const PropTypes = require('prop-types');
 const NativeAnimatedModule = NativeModules.NativeAnimatedModule;
-const NavigationCard = require("./NavigationCard");
-const NavigationCardStackPanResponder = require("./NavigationCardStackPanResponder");
-const NavigationCardStackStyleInterpolator = require("./NavigationCardStackStyleInterpolator");
-const NavigationPropTypes = require("../NavigationPropTypes");
-const NavigationTransitioner = require("../NavigationTransitioner");
-import React, { Component } from "react";
+const NavigationCard = require('./NavigationCard');
+const NavigationCardStackPanResponder = require('./NavigationCardStackPanResponder');
+const NavigationCardStackStyleInterpolator = require('./NavigationCardStackStyleInterpolator');
+const NavigationPropTypes = require('../NavigationPropTypes');
+const NavigationTransitioner = require('../NavigationTransitioner');
+import React, { Component } from 'react';
 
-const { Animated, StyleSheet, View } = require("react-native");
+const { Animated, StyleSheet, View } = require('react-native');
 
 const { Directions } = NavigationCardStackPanResponder;
 
@@ -51,9 +51,9 @@ import type {
   NavigationSceneRendererProps,
   NavigationTransitionProps,
   NavigationStyleInterpolator
-} from "NavigationTypeDefinition";
+} from 'NavigationTypeDefinition';
 
-import type { NavigationGestureDirection } from "NavigationCardStackPanResponder";
+import type { NavigationGestureDirection } from 'NavigationCardStackPanResponder';
 
 type Props = {
   direction: NavigationGestureDirection,
@@ -200,12 +200,12 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
     /**
      * Custom style applied to the cards stack.
      */
-    style: ViewStylePropTypes,
+    style: ViewPropTypes.style,
 
     /**
      * Custom style applied to the scenes stack.
      */
-    scenesStyle: ViewStylePropTypes
+    scenesStyle: ViewPropTypes.style
   };
 
   static defaultProps: DefaultProps = {
@@ -234,7 +234,7 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
   }
 
   _configureTransition = () => {
-    const isVertical = this.props.direction === "vertical";
+    const isVertical = this.props.direction === 'vertical';
     const animationConfig = {};
     if (
       !!NativeAnimatedModule &&
@@ -270,7 +270,7 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
   }
 
   _renderScene(props: NavigationSceneRendererProps): React.Element<any> {
-    const isVertical = this.props.direction === "vertical";
+    const isVertical = this.props.direction === 'vertical';
 
     const interpolator =
       this.props.cardStyleInterpolator ||
@@ -296,7 +296,7 @@ class NavigationCardStack extends React.Component<DefaultProps, Props, void> {
     return (
       <NavigationCard
         {...props}
-        key={"card_" + props.scene.key}
+        key={'card_' + props.scene.key}
         panHandlers={panHandlers}
         renderScene={this.props.renderScene}
         style={[style, this.props.cardStyle]}
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     // covered by the shadows of the scenes.
     // That said, we'd have use `flexDirection: 'column-reverse'` to move
     // Header above the scenes.
-    flexDirection: "column-reverse"
+    flexDirection: 'column-reverse'
   },
   scenes: {
     flex: 1
